@@ -50,12 +50,12 @@ void repartizareHomari(struct Homar *Homari, int noHomari, int dimensiunePlasa)
 
     for(iterator = 0; iterator < noHomari && dimensiunePlasaMomentan > 0; iterator++){
         if(Homari[iterator].lungime <= dimensiunePlasaMomentan){
-            printf("\nA fost ales Homarul nr.%d, cu valoarea:%d si lungimea:%d",Homari[iterator].id,Homari[iterator].valoare,Homari[iterator].lungime);
+            printf("\n Lobster id .%d, value:%d and lenght:%d",Homari[iterator].id,Homari[iterator].valoare,Homari[iterator].lungime);
             valoarePlasa += Homari[iterator].valoare;
             dimensiunePlasaMomentan -= Homari[iterator].lungime;
         }
     }
-    printf("\nValoarea maxima obtinuta: %f", valoarePlasa);
+    printf("\nMax value obtained: %f", valoarePlasa);
 }
 
 void generareHomarii(struct Homar *Homari, int noHomari)
@@ -70,7 +70,7 @@ void generareHomarii(struct Homar *Homari, int noHomari)
 }
 int generateNumbers()
 {
-    int generatedNumber=rand()%500+1;
+    int generatedNumber=rand()%1300+1;
     return generatedNumber;
 }
 
@@ -85,8 +85,8 @@ int main()
     generareHomarii(Homari, noHomari);
 
 
-    printf("  Numarul de homari:%d\n  Marimea plasei:%d", noHomari, DimensiunePlasa);
-    printf("\n==== Homari selectati====  ");
+    printf("  Number of lobsters:%d\n  Net capacity:%d", noHomari, DimensiunePlasa);
+    printf("\n==== Lobsters selected ====  ");
     sortareHomari(Homari, noHomari);
     repartizareHomari(Homari, noHomari, DimensiunePlasa);
     clock_t toc = clock();

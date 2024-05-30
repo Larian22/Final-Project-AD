@@ -9,11 +9,11 @@ struct Homar
     int lungime;
     int valoare;
 };
-float valoareaPerUnitate(struct Homar Homari)
+float valoareaPerUnitate(struct Homar Lobsters)
 {
-    return Homari.valoare / (Homari.lungime * 1.0);
+    return Lobsters.valoare / (Lobsters.lungime * 1.0);
 }
-void sortareHomari(struct Homar *Homari, int noHomari)
+void sortareLobsters(struct Homar *Lobsters, int noLobsters)
 {
     int iterator1;
     int iterator2;
@@ -22,55 +22,55 @@ void sortareHomari(struct Homar *Homari, int noHomari)
     int auxId;
     int auxValue;
 
-    for(iterator1 = 0; iterator1 < noHomari - 1; iterator1++){
+    for(iterator1 = 0; iterator1 < noLobsters - 1; iterator1++){
         indexMin = iterator1;
-        for(iterator2 = iterator1 + 1; iterator2 < noHomari; iterator2++){
-            if (valoareaPerUnitate(Homari[indexMin]) < valoareaPerUnitate(Homari[iterator2]) ){
+        for(iterator2 = iterator1 + 1; iterator2 < noLobsters; iterator2++){
+            if (valoareaPerUnitate(Lobsters[indexMin]) < valoareaPerUnitate(Lobsters[iterator2]) ){
                 indexMin = iterator2;
             }
         }
         if (indexMin != iterator1){
-            auxSize = Homari[indexMin].lungime;
-            auxId = Homari[indexMin].id;
-            auxValue = Homari[indexMin].valoare;
-            Homari[indexMin].lungime = Homari[iterator1].lungime;
-            Homari[indexMin].id = Homari[iterator1].id;
-            Homari[indexMin].valoare = Homari[iterator1].valoare;
-            Homari[iterator1].lungime = auxSize;
-            Homari[iterator1].id = auxId;
-            Homari[iterator1].valoare = auxValue;
+            auxSize = Lobsters[indexMin].lungime;
+            auxId = Lobsters[indexMin].id;
+            auxValue = Lobsters[indexMin].valoare;
+            Lobsters[indexMin].lungime = Lobsters[iterator1].lungime;
+            Lobsters[indexMin].id = Lobsters[iterator1].id;
+            Lobsters[indexMin].valoare = Lobsters[iterator1].valoare;
+            Lobsters[iterator1].lungime = auxSize;
+            Lobsters[iterator1].id = auxId;
+            Lobsters[iterator1].valoare = auxValue;
         }
     }
 }
-void repartizareHomari(struct Homar *Homari, int noHomari, int dimensiunePlasa)
+void repartizareLobsters(struct Homar *Lobsters, int noLobsters, int dimensiunePlasa)
 {
     int iterator = 0;
     int dimensiunePlasaMomentan = dimensiunePlasa;
     float valoarePlasa = 0.0;
 
-    for(iterator = 0; iterator < noHomari && dimensiunePlasaMomentan > 0; iterator++){
-        if(Homari[iterator].lungime <= dimensiunePlasaMomentan){
-            printf("\n Lobster id .%d, value:%d and lenght:%d",Homari[iterator].id,Homari[iterator].valoare,Homari[iterator].lungime);
-            valoarePlasa += Homari[iterator].valoare;
-            dimensiunePlasaMomentan -= Homari[iterator].lungime;
+    for(iterator = 0; iterator < noLobsters && dimensiunePlasaMomentan > 0; iterator++){
+        if(Lobsters[iterator].lungime <= dimensiunePlasaMomentan){
+            printf("\n Lobster id .%d, value:%d and lenght:%d",Lobsters[iterator].id,Lobsters[iterator].valoare,Lobsters[iterator].lungime);
+            valoarePlasa += Lobsters[iterator].valoare;
+            dimensiunePlasaMomentan -= Lobsters[iterator].lungime;
         }
     }
     printf("\nMax value obtained: %f", valoarePlasa);
 }
 
-void generareHomarii(struct Homar *Homari, int noHomari)
+void generareLobstersi(struct Homar *Lobsters, int noLobsters)
 {
     int iterator;
-    for(iterator = 0; iterator < noHomari; iterator++)
+    for(iterator = 0; iterator < noLobsters; iterator++)
     {
-        Homari[iterator].id = iterator;
-        Homari[iterator].lungime = rand()%500+1;
-        Homari[iterator].valoare = rand()%500+1;
+        Lobsters[iterator].id = iterator;
+        Lobsters[iterator].lungime = rand()%500+1;
+        Lobsters[iterator].valoare = rand()%500+1;
     }
 }
 int generateNumbers()
 {
-    int generatedNumber=rand()%1300+1;
+    int generatedNumber=rand()%+1;
     return generatedNumber;
 }
 
@@ -78,17 +78,17 @@ int main()
 {
     srand(time(NULL));
     clock_t tic = clock();
-    struct Homar *Homari;
-    int noHomari=generateNumbers();
-    int DimensiunePlasa=generateNumbers();
-    Homari = malloc(noHomari * sizeof(struct Homar));
-    generareHomarii(Homari, noHomari);
+    struct Homar *Lobsters;
+    int noLobsters= 1120 ;
+    int DimensiunePlasa=11200;
+    Lobsters = malloc(noLobsters * sizeof(struct Homar));
+    generareLobstersi(Lobsters, noLobsters);
 
 
-    printf("  Number of lobsters:%d\n  Net capacity:%d", noHomari, DimensiunePlasa);
+    printf("  Number of lobsters:%d\n  Net capacity:%d", noLobsters, DimensiunePlasa);
     printf("\n==== Lobsters selected ====  ");
-    sortareHomari(Homari, noHomari);
-    repartizareHomari(Homari, noHomari, DimensiunePlasa);
+    sortareLobsters(Lobsters, noLobsters);
+    repartizareLobsters(Lobsters, noLobsters, DimensiunePlasa);
     clock_t toc = clock();
     printf("\nElapsed: %f seconds\n", (double)(toc - tic) / CLOCKS_PER_SEC);
     return 0;
